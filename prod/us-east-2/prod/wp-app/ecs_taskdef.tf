@@ -1,4 +1,3 @@
-
 resource "aws_ecs_task_definition" "wp-app-task" {
   family = "wp-app"
   container_definitions = jsonencode([
@@ -25,7 +24,11 @@ resource "aws_ecs_task_definition" "wp-app-task" {
         },
         {
           name  = "WORDPRESS_DB_PASSWORD"
-          value = data.aws_db_proxy.wp-db-endpoint.endpoint
+          value = data.aws_secretsmanager_secret_version.rds_password.secret_string
+        },
+        {
+          name  = "WORDPRESS_DB_NAME"
+          value = "wordpress"
         }
       ]
     }

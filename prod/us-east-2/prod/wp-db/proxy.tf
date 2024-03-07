@@ -1,14 +1,13 @@
 
 
 resource "aws_db_proxy" "wp-db-proxy" {
-  name                   = "wp-db-proxy-${var.environment}"
-  debug_logging          = false
-  engine_family          = "MYSQL"
-  idle_client_timeout    = 1800
-  require_tls            = true
-  vpc_subnet_ids         = data.aws_db_subnet_group.wp-db-subnet-group.subnet_ids
-  vpc_security_group_ids = [data.aws_security_group.vpc-self.id]
-  role_arn               = aws_iam_role.wp-db-access-role.arn
+  name                = "wp-db-proxy-${var.environment}"
+  debug_logging       = false
+  engine_family       = "MYSQL"
+  idle_client_timeout = 1800
+  require_tls         = true
+  vpc_subnet_ids      = data.aws_db_subnet_group.wp-db-subnet-group.subnet_ids
+  role_arn            = aws_iam_role.wp-db-access-role.arn
 
   auth {
     auth_scheme = "SECRETS"

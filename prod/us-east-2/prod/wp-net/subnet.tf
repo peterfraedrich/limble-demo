@@ -35,18 +35,20 @@ resource "aws_subnet" "wp-app-sub-b" {
 }
 
 resource "aws_subnet" "wp-external-sub-a" {
-  vpc_id            = aws_vpc.wp-vpc-external.id
-  cidr_block        = "10.10.0.0/26"
-  availability_zone = "${var.aws_region}a"
+  vpc_id                  = aws_vpc.wp-vpc.id
+  cidr_block              = "10.0.10.0/26"
+  availability_zone       = "${var.aws_region}a"
+  map_public_ip_on_launch = true
   tags = {
     Purpose = "wp-external"
   }
 }
 
 resource "aws_subnet" "wp-external-sub-b" {
-  vpc_id            = aws_vpc.wp-vpc-external.id
-  cidr_block        = "10.10.0.64/26"
-  availability_zone = "${var.aws_region}b"
+  vpc_id                  = aws_vpc.wp-vpc.id
+  cidr_block              = "10.0.10.64/26"
+  availability_zone       = "${var.aws_region}b"
+  map_public_ip_on_launch = true
   tags = {
     Purpose = "wp-external"
   }

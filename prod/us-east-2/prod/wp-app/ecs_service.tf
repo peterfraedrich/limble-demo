@@ -8,7 +8,13 @@ resource "aws_ecs_service" "wp-app-service" {
   launch_type = "FARGATE"
 
   network_configuration {
-    subnets         = data.aws_subnets.wp-app-subnets
-    security_groups = [data.aws_security_group.default.id]
+    subnets = data.aws_subnets.wp-app-subnets
+
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.wp-app-tg.arn
+    container_name   = "wordpress"
+    container_port   = 80
   }
 }

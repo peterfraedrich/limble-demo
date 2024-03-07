@@ -6,3 +6,10 @@ variable "wp_image" {
 variable "environment" {
   type = string
 }
+
+variable "rds_password_arn" {
+  description = "URN of the password in secrets manager"
+  type        = string
+}
+
+variable "vpc_id_internal" {}

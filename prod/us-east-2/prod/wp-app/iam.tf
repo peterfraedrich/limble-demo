@@ -20,7 +20,7 @@ resource "aws_iam_policy" "wp-app-ecs-policy" {
   policy = <<EOF
 {
     "Version": "2012-10-17",
-    "Statement: []
+    "Statement": []
 }
 EOF
 }

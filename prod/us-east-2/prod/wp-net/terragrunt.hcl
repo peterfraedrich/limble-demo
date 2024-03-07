@@ -3,7 +3,6 @@ include "root" {
 }
 
 inputs = {
-    aws_region = local.aws_region
     octet_base = "10"
     subnet_mask = "26"
 
