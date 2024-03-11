@@ -12,4 +12,26 @@ variable "rds_password_arn" {
   type        = string
 }
 
-variable "vpc_id_internal" {}
+variable "vpc_id_internal" {
+  type = string
+}
+
+variable "vpc_app_secgroups" {
+  type = list(string)
+}
+
+variable "vpc_external_secgroups" {
+  type = list(string)
+}
+
+variable "db_subnet_group_subnets" {
+  type = list(string)
+}
+
+variable "external_subnets" {
+  type = list(string)
+}
+
+variable "internal_subnets" {
+  type = list(string)
+}

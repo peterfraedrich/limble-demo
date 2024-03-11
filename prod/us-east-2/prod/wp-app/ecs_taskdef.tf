@@ -1,12 +1,16 @@
 resource "aws_ecs_task_definition" "wp-app-task" {
-  family = "wp-app"
+  family                   = "wp-app"
+  requires_compatibilities = ["FARGATE"]
+  task_role_arn            = aws_iam_role.wp-app-ecs-role.arn
+  network_mode             = "awsvpc"
+  cpu                      = 512
+  memory                   = 1024
   container_definitions = jsonencode([
     {
       name      = "wordpress"
       image     = var.wp_image
-      cpu       = 10
-      memory    = 512
       essential = true
+
       portMappings = [
         {
           containerPort = 80

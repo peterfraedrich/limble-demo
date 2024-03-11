@@ -20,3 +20,11 @@ variable "vpc_id_internal" {
 variable "db_subnets" {
   type = list(string)
 }
+
+variable "vpc_app_secgroups" {
+  type = list(string)
+}
+
+variable "vpc_external_secgroups" {
+  type = list(string)
+}

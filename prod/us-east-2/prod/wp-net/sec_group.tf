@@ -43,6 +43,12 @@ resource "aws_vpc_security_group_egress_rule" "wp-net-allow-external-http-egress
   referenced_security_group_id = aws_security_group.wp-net-external-allow-http.id
 }
 
+resource "aws_vpc_security_group_egress_rule" "wp-net-allow-internet-access" {
+  security_group_id = aws_security_group.wp-net-allow-external-http.id
+  ip_protocol       = "-1"
+  cidr_ipv4         = "0.0.0.0/0"
+}
+
 # ALLOW HTTP INTO EXTERNAL VPC
 resource "aws_security_group" "wp-net-external-allow-http" {
   name        = "allow_public_http"
