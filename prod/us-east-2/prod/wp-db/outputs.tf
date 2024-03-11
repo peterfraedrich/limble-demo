@@ -9,3 +9,7 @@ output "rds_password_arn" {
 output "vpc_id_internal" {
   value = var.vpc_id_internal
 }
+
+output "rds_proxy_endpoint" {
+  value = aws_db_proxy.wp-db-proxy.endpoint
+}

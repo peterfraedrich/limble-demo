@@ -8,14 +8,20 @@ dependency "rds" {
         rds_username = "wordpress"
         rds_password_arn = "test"
         vpc_id_internal = "abcd1234"
+        rds_proxy_endpoint = "mock"
+        rds_password = "password"
     }
 }
 
 dependency "net" {
     config_path = "../wp-net"
     mock_outputs = {
-        vpc_id_internal = "abcd1234"
-        db_subnet_group_subnets = ["a", "b"]
+        vpc_id_internal = "mock"
+        db_subnet_group_subnets = ["mock"]
+        vpc_app_secgroups = ["mock"]
+        vpc_external_secgroups = ["mock"]
+        external_subnets = ["mock"]
+        internal_subnets = ["mock"]
     }
 }
 
@@ -29,4 +35,5 @@ inputs = {
     db_subnet_group_subnets = dependency.net.outputs.db_subnet_group_subnets
     external_subnets = dependency.net.outputs.external_subnets
     internal_subnets = dependency.net.outputs.internal_subnets
+    rds_proxy_endpoint = dependency.rds.outputs.rds_proxy_endpoint
 }

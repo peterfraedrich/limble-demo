@@ -2,6 +2,7 @@ resource "aws_ecs_task_definition" "wp-app-task" {
   family                   = "wp-app"
   requires_compatibilities = ["FARGATE"]
   task_role_arn            = aws_iam_role.wp-app-ecs-role.arn
+  execution_role_arn       = aws_iam_role.wp-app-ecs-role.arn
   network_mode             = "awsvpc"
   cpu                      = 512
   memory                   = 1024
@@ -20,7 +21,7 @@ resource "aws_ecs_task_definition" "wp-app-task" {
       environment = [
         {
           name  = "WORDPRESS_DB_HOST"
-          value = data.aws_db_proxy.wp-db-endpoint.endpoint
+          value = var.rds_proxy_endpoint
         },
         {
           name  = "WORDPRESS_DB_USER"
@@ -28,13 +29,35 @@ resource "aws_ecs_task_definition" "wp-app-task" {
         },
         {
           name  = "WORDPRESS_DB_PASSWORD"
-          value = data.aws_secretsmanager_secret_version.rds_password.secret_string
+          value = jsondecode(data.aws_secretsmanager_secret_version.rds_password.secret_string).password
         },
         {
           name  = "WORDPRESS_DB_NAME"
           value = "wordpress"
         }
+      ],
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-create-group  = "true"
+          awslogs-region        = "${var.aws_region}"
+          awslogs-group         = "wordpress"
+          awslogs-stream-prefix = "wp-app"
+        }
+      },
+      mountPoints = [
+        {
+          sourceVolume  = "wp-app-efs",
+          containerPath = "/var/www/html/wp-content",
+          readOnly      = false
+        }
       ]
     }
   ])
+  volume {
+    name = "wp-app-efs"
+    efs_volume_configuration {
+      file_system_id = aws_efs_file_system.wp-app-efs.id
+    }
+  }
 }

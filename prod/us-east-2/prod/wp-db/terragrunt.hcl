@@ -5,8 +5,10 @@ include "root" {
 dependency "net" {
     config_path = "../wp-net"
     mock_outputs = {
-        vpc_id_internal = "abcd1234"
-        db_subnet_group_subnets = ["a", "b"]
+        vpc_id_internal = "mock"
+        db_subnet_group_subnets = ["mock"]
+        vpc_app_secgroups = ["mock"]
+        vpc_external_secgroups = ["mock"]
     }
 }
 

@@ -22,7 +22,7 @@ resource "aws_iam_policy" "wp-app-ecs-policy" {
 	"Version": "2012-10-17",
 	"Statement": [
 		{
-			"Sid": "Statement1",
+			"Sid": "SSM",
 			"Effect": "Allow",
 			"Action": [
 				"secretsmanager:DescribeSecret",
@@ -36,23 +36,51 @@ resource "aws_iam_policy" "wp-app-ecs-policy" {
 			"Resource": "*"
 		},
 		{
-			"Sid": "Statement2",
+			"Sid": "AllowCloudwatch",
 			"Effect": "Allow",
 			"Action": [
-				"cloudwatch:*"
+				"cloudwatch:*",
+				"logs:*"
 			],
 			"Resource": "*"
 		},
-    {
-      "Sid": "Statement3",
+		{
+			"Sid": "ECS",
 			"Effect": "Allow",
 			"Action": [
 				"application-autoscaling:*",
-        "ecs:DescribeServices",
-        "ecs:UpdateService"
+				"ecs:DescribeServices",
+				"ecs:UpdateService"
+				],
+			"Resource": "*"
+		},
+		{
+			"Sid": "EFS",
+			"Effect": "Allow",
+			"Action": [
+				"elasticfilesystem:DescribeAccessPoints",
+				"elasticfilesystem:DescribeAccountPreferences",
+				"elasticfilesystem:DescribeFileSystems",
+				"elasticfilesystem:DescribeReplicationConfigurations",
+				"elasticfilesystem:ClientMount",
+				"elasticfilesystem:DescribeBackupPolicy",
+				"elasticfilesystem:DescribeFileSystemPolicy",
+				"elasticfilesystem:DescribeLifecycleConfiguration",
+				"elasticfilesystem:DescribeMountTargets",
+				"elasticfilesystem:DescribeMountTargetSecurityGroups",
+				"elasticfilesystem:DescribeTags",
+				"elasticfilesystem:ListTagsForResource",
+				"elasticfilesystem:Backup",
+				"elasticfilesystem:ClientRootAccess",
+				"elasticfilesystem:ClientWrite",
+				"elasticfilesystem:CreateFileSystem",
+				"elasticfilesystem:CreateMountTarget",
+				"elasticfilesystem:DeleteMountTarget",
+				"elasticfilesystem:Restore",
+				"elasticfilesystem:UpdateFileSystem"
 			],
 			"Resource": "*"
-    }
+		}
 	]
 }
 EOF
