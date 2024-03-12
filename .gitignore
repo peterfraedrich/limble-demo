@@ -1,2 +1,3 @@
 .terraform/
-cloudflare_token
+.terraform.lock*
+*.tfstate*
