@@ -36,6 +36,7 @@ resource "aws_ecs_task_definition" "wp-app-task" {
           value = "wordpress"
         },
         {
+          # force wordpress to use https://; removing this breaks cloudfront
           name  = "WORDPRESS_CONFIG_EXTRA"
           value = "$_SERVER['HTTPS'] = 'on';"
         }

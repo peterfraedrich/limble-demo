@@ -14,17 +14,21 @@ variable "rds_username" {
 }
 
 variable "vpc_id_internal" {
-  type = string
+  description = "ID of the internal VPC"
+  type        = string
 }
 
 variable "db_subnets" {
-  type = list(string)
+  description = "list of IDs for the DB subnets"
+  type        = list(string)
 }
 
 variable "vpc_app_secgroups" {
-  type = list(string)
+  description = "list of IDs for the application sec groups"
+  type        = list(string)
 }
 
 variable "vpc_external_secgroups" {
-  type = list(string)
+  description = "list of IDs for the external sec groups"
+  type        = list(string)
 }

@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] set up CDN and WAF
-- [ ] test app stack
+- [ ] clean up
 - [ ] write docs / diagram app
 - [ ] set up observability (grafana hosted)
