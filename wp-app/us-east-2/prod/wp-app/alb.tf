@@ -23,6 +23,11 @@ resource "aws_lb_target_group" "wp-app-tg" {
   health_check {
     path = "/"
   }
+  stickiness {
+    enabled         = true
+    type            = "lb_cookie"
+    cookie_duration = 43200 # 12 hours
+  }
 }
 
 resource "aws_lb_listener" "wp-app-lb-listener" {
