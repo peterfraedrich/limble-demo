@@ -1,7 +1,6 @@
 # TODO
 
-- [ ] fix EFS timeout from ECS????
-- [ ] EFS for static storage for WP app
 - [ ] set up CDN and WAF
 - [ ] test app stack
+- [ ] write docs / diagram app
 - [ ] set up observability (grafana hosted)

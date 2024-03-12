@@ -34,6 +34,10 @@ resource "aws_ecs_task_definition" "wp-app-task" {
         {
           name  = "WORDPRESS_DB_NAME"
           value = "wordpress"
+        },
+        {
+          name  = "WORDPRESS_CONFIG_EXTRA"
+          value = "$_SERVER['HTTPS'] = 'on';"
         }
       ],
       logConfiguration = {

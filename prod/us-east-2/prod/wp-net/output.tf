@@ -25,7 +25,8 @@ output "internal_subnets" {
 
 output "vpc_app_secgroups" {
   value = [
-    aws_security_group.wp-net-allow-external-http.id
+    aws_security_group.wp-net-allow-external-http.id,
+    aws_default_security_group.wp-vpc-internal-default.id
   ]
 }
 

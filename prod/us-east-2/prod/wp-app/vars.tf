@@ -52,3 +52,4 @@ variable "rds_proxy_endpoint" {
   description = "endpoint of the RDS proxy"
   type        = string
 }
+
