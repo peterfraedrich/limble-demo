@@ -1,19 +1,21 @@
 
 
 resource "aws_db_proxy" "wp-db-proxy" {
-  name                = "wp-db-proxy-${var.environment}"
-  debug_logging       = false
-  engine_family       = "MYSQL"
-  idle_client_timeout = 1800
-  require_tls         = true
-  vpc_subnet_ids      = data.aws_db_subnet_group.wp-db-subnet-group.subnet_ids
-  role_arn            = aws_iam_role.wp-db-access-role.arn
+  name                   = "wp-db-proxy-${var.environment}"
+  debug_logging          = false
+  engine_family          = "MYSQL"
+  idle_client_timeout    = 1800
+  require_tls            = false
+  vpc_subnet_ids         = data.aws_db_subnet_group.wp-db-subnet-group.subnet_ids
+  vpc_security_group_ids = var.vpc_app_secgroups
+  role_arn               = aws_iam_role.wp-db-access-role.arn
 
   auth {
-    auth_scheme = "SECRETS"
-    description = "use DB password from secrets manager"
-    iam_auth    = "DISABLED"
-    secret_arn  = aws_db_instance.wp-db.master_user_secret.0.secret_arn
+    auth_scheme               = "SECRETS"
+    client_password_auth_type = "MYSQL_NATIVE_PASSWORD"
+    description               = "use DB password from secrets manager"
+    iam_auth                  = "DISABLED"
+    secret_arn                = aws_db_instance.wp-db.master_user_secret.0.secret_arn
   }
 }
 

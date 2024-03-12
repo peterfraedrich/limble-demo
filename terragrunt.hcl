@@ -6,6 +6,8 @@ locals {
     account_name = local.account_vars.locals.account_name
     account_id = local.account_vars.locals.aws_account_id
     aws_region = local.region_vars.locals.aws_region
+    site_domain = "peterfraedrich.com"
+    subdomain = "demo"
 }
 
 generate "provider" {
@@ -24,4 +26,8 @@ inputs = merge(
     local.account_vars.locals,
     local.region_vars.locals,
     local.env_vars.locals,
+    {
+        site_domain = local.site_domain,
+        subdomain = local.subdomain
+    }
 )
