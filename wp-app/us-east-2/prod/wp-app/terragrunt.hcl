@@ -20,8 +20,8 @@ dependency "net" {
         db_subnet_group_subnets = ["mock"]
         vpc_app_secgroups = ["mock"]
         vpc_external_secgroups = ["mock"]
-        external_subnets = ["mock"]
-        internal_subnets = ["mock"]
+        external_subnets = ["mock", "mock"]
+        internal_subnets = ["mock", "mock2"]
     }
 }
 

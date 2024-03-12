@@ -11,6 +11,11 @@ resource "aws_db_instance" "wp-db" {
   skip_final_snapshot         = true
   db_subnet_group_name        = aws_db_subnet_group.wp-db-subnets.name
 
+  # backups
+  backup_retention_period = 3
+  backup_target           = "region"
+  backup_window           = "03:00-06:00"
+
   tags = {
     Name = "wb-db-${var.environment}"
   }
