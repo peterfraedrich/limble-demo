@@ -95,3 +95,6 @@ One area that I didn't get to touch on as much as I would like is observability 
 
 ### IaC
 With more experience in Terragrunt I'm sure I'll discover better ways to do some of the things I did, especially around sharing data between modules. I would like to explore this and see if there's more streamlined or different best practices that could be adopted.
+
+### Misc.
+I assumed the application was to be started up in the default state and not pre-seeded with data. Future revisions would provide a template to seed the application with database and static media (plugins, uploads, themes, etc). This would eliminate the initial setup step present in the current configuration.
