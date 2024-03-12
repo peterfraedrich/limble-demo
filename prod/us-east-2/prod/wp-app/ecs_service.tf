@@ -2,7 +2,7 @@ resource "aws_ecs_service" "wp-app-service" {
   name            = "wp-app"
   cluster         = aws_ecs_cluster.wp-app-cluster.id
   task_definition = aws_ecs_task_definition.wp-app-task.arn
-  desired_count   = 3
+  desired_count   = 3 # start with 3; let ASG decide how many we need
 
   launch_type = "FARGATE"
 
@@ -11,7 +11,6 @@ resource "aws_ecs_service" "wp-app-service" {
     security_groups = concat(
       var.vpc_app_secgroups
     )
-
   }
 
   load_balancer {

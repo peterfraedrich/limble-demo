@@ -1,7 +1,11 @@
 resource "aws_cloudfront_distribution" "wp-cf" {
   enabled = true
+
   default_cache_behavior {
     target_origin_id = "wp-app"
+    min_ttl          = 0     # no cache
+    default_ttl      = 3600  # 1 hour
+    max_ttl          = 86400 # 1 day
     allowed_methods = [
       "DELETE",
       "GET",
@@ -16,20 +20,24 @@ resource "aws_cloudfront_distribution" "wp-cf" {
       "HEAD",
       "OPTIONS"
     ]
+
     forwarded_values {
       query_string = true
       headers = [
         "Host",
         "Origin",
-        "HTTP_X_FORWARDED_PROTO"
+        "X-Forwarded-Proto"
       ]
+
       cookies {
         forward = "all"
       }
+
     }
     compress               = true
     viewer_protocol_policy = "redirect-to-https"
   }
+
   restrictions {
     geo_restriction {
       restriction_type = "none"

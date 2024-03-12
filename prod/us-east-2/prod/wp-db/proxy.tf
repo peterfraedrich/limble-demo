@@ -1,5 +1,3 @@
-
-
 resource "aws_db_proxy" "wp-db-proxy" {
   name                   = "wp-db-proxy-${var.environment}"
   debug_logging          = false
